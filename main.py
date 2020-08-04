@@ -8,7 +8,6 @@ import requests
 import json
 import os
 from urllib.parse import urlencode, parse_qsl
-from urllib.parse import urlencode
 import xbmc
 import xbmcgui
 import xbmcplugin
