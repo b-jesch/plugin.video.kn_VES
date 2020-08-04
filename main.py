@@ -7,10 +7,8 @@ import sys
 import requests
 import json
 import os
-# from urllib.parse import urlencode, parse_qsl
-# from urllib.parse import urlencode
-from urllib import urlencode
-from urlparse import parse_qsl
+from urllib.parse import urlencode, parse_qsl
+from urllib.parse import urlencode
 import xbmc
 import xbmcgui
 import xbmcplugin
@@ -134,9 +132,9 @@ def list_videos():
     for video in playlist:
 
         if video['plot'] != '':
-            video['plot'] += '[CR][CR]{} {}'.format(LS(30068).encode('utf-8'), video['user'].encode('utf-8'))
+            video['plot'] += '[CR][CR]{} {}'.format(LS(30068), video['user'])
         else:
-            video['plot'] = '{} {}'.format(LS(30068).encode('utf-8'), video['user'].encode('utf-8'))
+            video['plot'] = '{} {}'.format(LS(30068), video['user'])
 
         list_item = xbmcgui.ListItem(label=video['event'])
         list_item.setInfo('video', {'genre': video['genre'],
@@ -171,11 +169,11 @@ def list_videos():
             color = ('[COLOR=FFFFFF00]', '[/COLOR]')
 
         list_item.setInfo('video', {'title': '{}{}{} ({})'.format(color[0],
-                                                                  video['event'].encode('utf-8'),
+                                                                  video['event'],
                                                                   color[1],
                                                                   add_info)})
-        list_item.setLabel2(add_info.encode('utf-8'))
-        list_item.setInfo('video', {'tagline': add_info.encode('utf-8')})
+        list_item.setLabel2(add_info)
+        list_item.setInfo('video', {'tagline': add_info})
         list_item.setProperty('IsPlayable', 'true')
         is_folder = False
         url = get_url({'action': 'play', 'video': video['stream'].encode('ascii', 'ignore'),

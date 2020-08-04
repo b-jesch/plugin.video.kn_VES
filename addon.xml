@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<addon id="plugin.video.kn_ves" version="0.0.6" name="KN Video Event Service" provider-name="Birger Jesch">
+<addon id="plugin.video.kn_ves" version="0.0.6~matrix" name="KN Video Event Service" provider-name="Birger Jesch">
 <requires>
-  <import addon="xbmc.python" version="2.25.0"/>
+  <import addon="xbmc.python" version="3.0.0"/>
   <import addon="script.module.youtube.dl" version="19.912.1"/>
   <import addon="script.module.requests" version="2.22.0"/>
 </requires>
