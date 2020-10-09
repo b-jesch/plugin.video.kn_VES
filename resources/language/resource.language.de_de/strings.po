@@ -105,6 +105,10 @@ msgctxt "#30048"
 msgid "Could play Video"
 msgstr "Kann Video nicht abspielen"
 
+msgctxt "#30049"
+msgid "No Video Content available"
+msgstr "Keine Video-Inhalte verfügbar"
+
 # strings
 
 msgctxt "#30060"
