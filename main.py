@@ -67,7 +67,8 @@ def get_playlist():
             if js.get('code', '') == '30030':
 
                 # empty playlist
-                notify(LS(30000), LS(30030))
+                writeLog('No content available', xbmc.LOGERROR)
+                notify(LS(30000), LS(30049))
                 exit()
 
             elif js.get('code', '') == '30031':
