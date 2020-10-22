@@ -133,8 +133,10 @@ def list_videos():
 
         if video['plot'] != '':
             video['plot'] += '[CR][CR]{} {}'.format(LS(30068), video['user'])
-        else:
+        elif video['user'] != '':
             video['plot'] = '{} {}'.format(LS(30068), video['user'])
+        else:
+            pass
 
         list_item = xbmcgui.ListItem(label=video['event'])
         list_item.setInfo('video', {'genre': video['genre'],
