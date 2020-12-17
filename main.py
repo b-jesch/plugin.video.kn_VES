@@ -173,10 +173,10 @@ def list_videos():
         else:
             color = ('[COLOR=FFFFFF00]', '[/COLOR]')
 
-        list_item.setInfo('video', {'title': '{}{}{} ({})'.format(color[0],
-                                                                  video['event'].encode('utf-8'),
+        list_item.setInfo('video', {'title': '{}{}{}: {}'.format(color[0],
+                                                                  add_info,
                                                                   color[1],
-                                                                  add_info)})
+                                                                  video['event'].encode('utf-8'))})
         list_item.setLabel2(add_info.encode('utf-8'))
         list_item.setInfo('video', {'tagline': add_info.encode('utf-8')})
         list_item.setProperty('IsPlayable', 'true')
