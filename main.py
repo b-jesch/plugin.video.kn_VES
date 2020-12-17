@@ -170,7 +170,7 @@ def list_videos():
         else:
             color = ('[COLOR=FFFFFF00]', '[/COLOR]')
 
-        list_item.setInfo('video', {'title': '{}{}{}: {}'.format(color[0],
+        list_item.setInfo('video', {'title': '{}{}:{} {}'.format(color[0],
                                                                add_info,
                                                                color[1],
                                                                video['event'])})
