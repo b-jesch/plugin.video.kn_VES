@@ -24,7 +24,7 @@ yt_quality = getAddonSetting('quality', sType=NUM)
 
 API = 'api.php?playlist'
 
-FANART = os.path.join(PATH, 'resources', 'media', 'fanart.jpg')
+FANART = os.path.join(PATH, 'resources', 'media', 'wp3.jpg')
 ICON = os.path.join(PATH, 'resources', 'media', 'icon.png')
 
 SERVER_TIME_FORMAT = '%Y-%m-%d %H:%M'
@@ -47,6 +47,30 @@ def convDate(sDatetime, sFrom=SERVER_TIME_FORMAT, sTo=PLUGIN_TIME_FORMAT):
     if so:
         return datetime2str(so, sTo)
     return sDatetime
+
+
+def get_items(item):
+    try:
+        req = requests.get(item)
+        req.raise_for_status()
+        return True
+
+    except requests.exceptions.ConnectTimeout as e:
+        writeLog(str(e), xbmc.LOGERROR)
+        # no response
+        notify(LS(30000), LS(30040), xbmcgui.NOTIFICATION_ERROR)
+
+    except requests.exceptions.ConnectionError as e:
+        writeLog(str(e), xbmc.LOGERROR)
+        # could not resolve host
+        notify(LS(30000), LS(30045), xbmcgui.NOTIFICATION_ERROR)
+
+    except requests.exceptions.HTTPError as e:
+
+        if req.status_code == 403 or req.status_code == 404:
+            # forbidden/not found
+            writeLog(str(e), xbmc.LOGERROR)
+    return False
 
 
 def get_playlist():
@@ -134,21 +158,21 @@ def list_videos():
 
     for video in playlist:
 
-        if video['plot'] != '':
-            video['plot'] += '[CR][CR]{} {}'.format(LS(30068).encode('utf-8'), video['user'].encode('utf-8'))
-        elif video['user'] != '':
-            video['plot'] = '{} {}'.format(LS(30068).encode('utf-8'), video['user'].encode('utf-8'))
-        else:
-            pass
+        if video['user'] is not None:
+            if video['plot'] != '':
+                video['plot'] += '[CR][CR]{} {}'.format(LS(30068).encode('utf-8'), video['user'].encode('utf-8'))
+            else:
+                video['plot'] = '{} {}'.format(LS(30068).encode('utf-8'), video['user'].encode('utf-8'))
 
         list_item = xbmcgui.ListItem(label=video['event'])
         list_item.setInfo('video', {'genre': video['genre'],
                                     'plot': video['plot'],
                                     'mediatype': 'video'})
 
-        if video['fanart'] == '': video['fanart'] = FANART
-        if video['icon'] == '': video['icon'] = ICON
-        list_item.setArt({'thumb': video['icon'], 'icon': video['icon'], 'fanart': video['fanart']})
+        if not get_items(video['fanart']): video['fanart'] = FANART
+        if not get_items(video['icon']): video['icon'] = ICON
+        list_item.setArt({'thumb': video['icon'], 'icon': video['icon'],
+                          'fanart': video['fanart'], 'poster': video['fanart']})
 
         status = 0
         color = ('', '',)
