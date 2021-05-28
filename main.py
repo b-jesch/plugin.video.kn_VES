@@ -51,7 +51,7 @@ def convDate(sDatetime, sFrom=SERVER_TIME_FORMAT, sTo=PLUGIN_TIME_FORMAT):
 
 def get_items(item):
     try:
-        req = requests.get(item)
+        req = requests.get(item, stream=True)
         req.raise_for_status()
         return True
 
