@@ -45,9 +45,10 @@ def convDate(sDatetime, sFrom=SERVER_TIME_FORMAT, sTo=PLUGIN_TIME_FORMAT):
         return datetime2str(so, sTo)
     return sDatetime
 
-def get_items(item):
+
+def is_available(item):
     try:
-        req = requests.get(item)
+        req = requests.get(item, stream=True)
         req.raise_for_status()
         return True
 
@@ -67,6 +68,7 @@ def get_items(item):
             # forbidden/not found
             writeLog(str(e), xbmc.LOGERROR)
     return False
+
 
 def get_playlist():
     playlist = None
@@ -165,8 +167,8 @@ def list_videos():
                                     'plot': video['plot'],
                                     'mediatype': 'video'})
 
-        if not get_items(video['fanart']): video['fanart'] = FANART
-        if not get_items(video['icon']): video['icon'] = ICON
+        if not is_available(video['fanart']): video['fanart'] = FANART
+        if not is_available(video['icon']): video['icon'] = ICON
         list_item.setArt({'thumb': video['icon'], 'icon': video['icon'],
                           'fanart': video['fanart'], 'poster': video['fanart']})
 
