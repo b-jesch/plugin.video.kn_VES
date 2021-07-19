@@ -46,7 +46,8 @@ def convDate(sDatetime, sFrom=SERVER_TIME_FORMAT, sTo=PLUGIN_TIME_FORMAT):
     return sDatetime
 
 
-def is_available(item):
+def exists(item):
+    if not item: return False
     try:
         req = requests.get(item, stream=True)
         req.raise_for_status()
@@ -167,8 +168,8 @@ def list_videos():
                                     'plot': video['plot'],
                                     'mediatype': 'video'})
 
-        if not is_available(video['fanart']): video['fanart'] = FANART
-        if not is_available(video['icon']): video['icon'] = ICON
+        if not exists(video['fanart']): video['fanart'] = FANART
+        if not exists(video['icon']): video['icon'] = ICON
         list_item.setArt({'thumb': video['icon'], 'icon': video['icon'],
                           'fanart': video['fanart'], 'poster': video['fanart']})
 
