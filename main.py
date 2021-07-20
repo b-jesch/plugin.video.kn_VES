@@ -173,7 +173,7 @@ def list_videos():
         if not exists(video['fanart']): video['fanart'] = FANART
         if not exists(video['icon']): video['icon'] = ICON
         list_item.setArt({'thumb': video['icon'], 'icon': video['icon'],
-                          'fanart': video['fanart'], 'poster': video['fanart']})
+                          'fanart': video['fanart']})
 
         status = 0
         color = ('', '',)
