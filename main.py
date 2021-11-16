@@ -211,7 +211,7 @@ def list_videos():
 
         xbmcplugin.addDirectoryItem(_handle, url, list_item, is_folder)
 
-    xbmcplugin.addSortMethod(_handle, xbmcplugin.SORT_METHOD_NONE)
+    xbmcplugin.addSortMethod(_handle, xbmcplugin.SORT_METHOD_DATE)
     xbmcplugin.endOfDirectory(_handle, succeeded=True, updateListing=True, cacheToDisc=False)
 
 
