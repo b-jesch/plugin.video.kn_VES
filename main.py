@@ -164,9 +164,6 @@ def list_videos():
             pass
 
         list_item = xbmcgui.ListItem(label=video['event'])
-        list_item.setInfo('video', {'genre': video['genre'],
-                                    'plot': video['plot'],
-                                    'mediatype': 'video'})
 
         if not exists(video['fanart']): video['fanart'] = FANART
         if not exists(video['icon']): video['icon'] = ICON
@@ -199,9 +196,14 @@ def list_videos():
         list_item.setInfo('video', {'title': '{}{}:{} {}'.format(color[0],
                                                                add_info,
                                                                color[1],
-                                                               video['event'])})
+                                                               video['event']),
+                                    'tagline': add_info,
+                                    'dateadded': video['from'],
+                                    'genre': video['genre'],
+                                    'plot': video['plot'],
+                                    'mediatype': 'video'})
+
         list_item.setLabel2(add_info)
-        list_item.setInfo('video', {'tagline': add_info})
         list_item.setProperty('IsPlayable', 'true')
         is_folder = False
         url = get_url({'action': 'play', 'video': video['stream'].encode('ascii', 'ignore'),
@@ -209,7 +211,7 @@ def list_videos():
 
         xbmcplugin.addDirectoryItem(_handle, url, list_item, is_folder)
 
-    xbmcplugin.addSortMethod(_handle, xbmcplugin.SORT_METHOD_DATE)
+    xbmcplugin.addSortMethod(_handle, xbmcplugin.SORT_METHOD_DATEADDED)
     xbmcplugin.endOfDirectory(_handle, succeeded=True, updateListing=True, cacheToDisc=False)
 
 
