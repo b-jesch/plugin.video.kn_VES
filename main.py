@@ -198,7 +198,7 @@ def list_videos():
                                                                color[1],
                                                                video['event']),
                                     'tagline': add_info,
-                                    'dateadded': video['from'],
+                                    'date': video['from'],
                                     'genre': video['genre'],
                                     'plot': video['plot'],
                                     'mediatype': 'video'})
@@ -211,7 +211,7 @@ def list_videos():
 
         xbmcplugin.addDirectoryItem(_handle, url, list_item, is_folder)
 
-    xbmcplugin.addSortMethod(_handle, xbmcplugin.SORT_METHOD_DATEADDED)
+    xbmcplugin.addSortMethod(_handle, xbmcplugin.SORT_METHOD_DATE)
     xbmcplugin.endOfDirectory(_handle, succeeded=True, updateListing=True, cacheToDisc=False)
 
 
