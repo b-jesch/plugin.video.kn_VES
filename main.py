@@ -204,7 +204,7 @@ def list_videos():
                                                                   video['event'].encode('utf-8'))})
         list_item.setLabel2(add_info.encode('utf-8'))
         list_item.setInfo('video', {'tagline': add_info.encode('utf-8'),
-                                    'dateadded': video['from']})
+                                    'date': video['from']})
 
         list_item.setProperty('IsPlayable', 'true')
         is_folder = False
@@ -213,7 +213,7 @@ def list_videos():
 
         xbmcplugin.addDirectoryItem(_handle, url, list_item, is_folder)
 
-    xbmcplugin.addSortMethod(_handle, xbmcplugin.SORT_METHOD_DATEADDED)
+    xbmcplugin.addSortMethod(_handle, xbmcplugin.SORT_METHOD_DATE)
     xbmcplugin.endOfDirectory(_handle, succeeded=True, updateListing=True, cacheToDisc=False)
 
 
