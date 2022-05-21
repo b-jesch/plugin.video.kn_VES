@@ -7,6 +7,7 @@ import time
 import xbmc
 import xbmcgui
 import xbmcaddon
+import xbmcvfs
 
 from contextlib import contextmanager
 
@@ -14,8 +15,8 @@ ADDON = xbmcaddon.Addon(id='plugin.video.kn_ves')
 ADDON_NAME = ADDON.getAddonInfo('name')
 ID = ADDON.getAddonInfo('id')
 VERSION = ADDON.getAddonInfo('version')
-PATH = xbmc.translatePath(ADDON.getAddonInfo('path'))
-PROFILE = xbmc.translatePath(ADDON.getAddonInfo('profile'))
+PATH = xbmcvfs.translatePath(ADDON.getAddonInfo('path'))
+PROFILE = xbmcvfs.translatePath(ADDON.getAddonInfo('profile'))
 LS = ADDON.getLocalizedString
 
 # Constants
