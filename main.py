@@ -21,6 +21,7 @@ writeLog('Event Server: {}'.format(server), xbmc.LOGINFO)
 if server[-1] != '/': server = '{}/'.format(ADDON.getSetting('server'))
 
 yt_quality = getAddonSetting('quality', sType=NUM)
+show_outdated = getAddonSetting('show_outdated', sType=BOOL)
 
 API = 'api.php?playlist'
 
@@ -210,6 +211,8 @@ def list_videos():
         is_folder = False
         url = get_url({'action': 'play', 'video': video['stream'].encode('ascii', 'ignore'),
                        'isyoutube': video['isyoutube'], 'isplayable': status})
+
+        if status == 3 and not show_outdated: continue
 
         xbmcplugin.addDirectoryItem(_handle, url, list_item, is_folder)
 

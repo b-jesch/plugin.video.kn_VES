@@ -67,6 +67,10 @@ msgctxt "#30014"
 msgid "Full HD (1080p)"
 msgstr "Full HD (1080p)"
 
+msgctxt "#30015"
+msgid "Show outdated Entries"
+msgstr "Zeige abgelaufene Einträge"
+
 # Error messages
 
 msgctxt "#30040"
