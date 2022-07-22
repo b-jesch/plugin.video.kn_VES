@@ -172,32 +172,31 @@ def list_videos():
                           'fanart': video['fanart']})
 
         status = 0
-        color = ('', '',)
+        color = '[COLOR=FFFFFFFF]'
         add_info = playstate_info[status]
 
         if video['stream'] == '':
-            color = ('[COLOR=FFFF0000]', '[/COLOR]')
+            color = '[COLOR=FFFF0000]'
 
         if video.get('permalink', False):
             status = 1
             add_info = playstate_info[status]
         elif current < int(video['ts_from']):
             status = 2
+            color = '[COLOR=FFBBBB00]'
             add_info = playstate_info[status].format(convDate(video['from']))
         elif int(video['ts_from']) < current < int(video['ts_to']):
             status = 4
+            color = '[COLOR=FF00BB00]'
             add_info = playstate_info[status].format(convDate(video['to']))
         elif current > int(video['ts_to'] and int(video['ts_to']) > 0):
             status = 3
-            color = ('[COLOR=FF4040FF]', '[/COLOR]')
+            color = '[COLOR=FF4040FF]'
             add_info = playstate_info[status].format(convDate(video['to']))
         else:
-            color = ('[COLOR=FFFFFF00]', '[/COLOR]')
+            color = '[COLOR=FFFFFF00]'
 
-        list_item.setInfo('video', {'title': '{}{}:{} {}'.format(color[0],
-                                                               add_info,
-                                                               color[1],
-                                                               video['event']),
+        list_item.setInfo('video', {'title': '{}{}:[/COLOR] {}'.format(color, add_info, video['event']),
                                     'tagline': add_info,
                                     'date': video['from'],
                                     'genre': video['genre'],
