@@ -164,6 +164,8 @@ def list_videos():
         else:
             pass
 
+        if video['ts_from'] == '' or (video['ts_to'] == '' and not video.get('permalink', False)): continue
+
         list_item = xbmcgui.ListItem(label=video['event'])
 
         if not exists(video['fanart']): video['fanart'] = FANART
@@ -175,25 +177,27 @@ def list_videos():
         color = '[COLOR=FFFFFFFF]'
         add_info = playstate_info[status]
 
+        stream = True
         if video['stream'] == '':
             color = '[COLOR=FFFF0000]'
+            stream = False
 
         if video.get('permalink', False):
             status = 1
             add_info = playstate_info[status]
         elif current < int(video['ts_from']):
             status = 2
-            color = '[COLOR=FFBBBB00]'
+            if stream: color = '[COLOR=FFBBBB00]'
             add_info = playstate_info[status].format(convDate(video['from']))
         elif int(video['ts_from']) < current < int(video['ts_to']):
             status = 4
-            color = '[COLOR=FF00BB00]'
+            if stream: color = '[COLOR=FF00BB00]'
             add_info = playstate_info[status].format(convDate(video['to']))
         elif current > int(video['ts_to'] and int(video['ts_to']) > 0):
             status = 3
             color = '[COLOR=FF4040FF]'
             add_info = playstate_info[status].format(convDate(video['to']))
-        else:
+        elif stream:
             color = '[COLOR=FFFFFF00]'
 
         list_item.setInfo('video', {'title': '{}{}:[/COLOR] {}'.format(color, add_info, video['event']),
