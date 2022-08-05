@@ -164,7 +164,7 @@ def list_videos():
         else:
             pass
 
-        if video['ts_from'] == '' or (video['ts_to'] == '' and not video.get('permalink', False)): continue
+        if not video.get('permalink', False) and (video['ts_from'] == '' or video['ts_to'] == ''): continue
 
         list_item = xbmcgui.ListItem(label=video['event'])
 
